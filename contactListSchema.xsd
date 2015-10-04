@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified"
+    vc:minVersion="1.0" vc:maxVersion="1.1">
+    <xs:element name="contactLists">
+        <xs:complexType>
+            <xs:sequence>
+            <xs:element name='contact' type='contactType'
+                minOccurs='0' maxOccurs='unbounded' />
+            </xs:sequence>
+        </xs:complexType>
+       </xs:element>
+    
+    
+    <xs:complexType name="contactType">
+       
+           
+        <xs:sequence>
+            <xs:element name="image" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            
+            <xs:element name="firstName">
+             <xs:simpleType>
+               <xs:restriction base="xs:string">
+                   <xs:pattern value="[A-Z][aA-zZ]+"></xs:pattern>
+               </xs:restriction>  
+             </xs:simpleType>   
+                
+            </xs:element>
+            <xs:element name="lastName">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[A-Z][aA-zZ]+"></xs:pattern>
+                    </xs:restriction>  
+                </xs:simpleType> 
+                
+                
+            </xs:element>
+            <xs:element name="gender">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="M|F"></xs:pattern>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="nickName" type="xs:string"/>
+            <xs:element name="dateOfBirth" type="xs:date"/>
+      
+        <xs:element name="postalDetails" maxOccurs="unbounded">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="city" type="xs:string"/>
+                    <xs:element name="street" type="xs:string"/>
+                    <xs:element name="postalCode" type="xs:string"/>
+                    <xs:element name="country" type="xs:string"/>
+                   
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element> 
+            <xs:element name="emails">
+                <xs:complexType>
+                   <xs:sequence>
+                     <xs:element name="officeEmail" />
+                       <xs:element name="privateEmail"/>
+                       
+                       
+                       
+                       
+                   </xs:sequence> 
+                    
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="telephoneNumbers">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element name="privateMobile" minOccurs="0" >
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="[5]\d{7}"></xs:pattern>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="office" minOccurs="0" >
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern value="\d{7}"></xs:pattern>
+                                </xs:restriction>
+                            </xs:simpleType>
+                            
+                        </xs:element>
+                        
+                        
+                        
+                        
+                    </xs:all> 
+                    
+                </xs:complexType>
+            </xs:element>
+           
+        </xs:sequence>
+   
+    </xs:complexType>			 
+</xs:schema>
+
+
