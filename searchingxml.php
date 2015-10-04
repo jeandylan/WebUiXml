@@ -24,7 +24,7 @@ for ($idx = 0; $idx < $imageCnt; $idx++) {
 
 }
 
-
+//come in text
 $x=0;
 while($d->parentNode->nodeName != "contact"){
     echo"\n". $d->parentNode->nodeName;
