@@ -3,55 +3,51 @@ include 'xmlFunction.php';
 $xml = new DOMDocument();
 $xml->preserveWhiteSpace = false;
 $xml->load("contactList.xml");
-$xml->preserveWhiteSpace = false;
-echo "null";
 
 
 
 
 
-$imageList = $xml->getElementsByTagName('office');
-$imageCnt  = $imageList->length;
-$d;
 
-$z;
-for ($idx = 0; $idx < $imageCnt; $idx++) {
-    if ($imageList->item($idx)->nodeValue=="7654321"){
+$nodeSearch = $xml->getElementsByTagName('office');
+$nodeLenght  = $nodeSearch->length;
+$dataIsInThisNode;
 
-        $d=$imageList->item($idx);
+for ($nodeIndex = 0; $nodeIndex < $nodeLenght; $nodeIndex++) {
+    if ($nodeSearch->item($nodeIndex)->nodeValue=="6310814"){
+
+        $dataIsInThisNode=$nodeSearch->item($nodeIndex);
 
     }
 
 }
 
-//come in text
-$x=0;
-while($d->parentNode->nodeName != "contact"){
-    echo"\n". $d->parentNode->nodeName;
-    echo "inloop";
- $x++;
-    if($x==20){
-        break;
-        echo "inloop";
+
+$whileLoopControler=0;//a loop controller to prevent below loop from overflowing
+while($dataIsInThisNode->nodeName !="contact"){
+
+    $dataIsInThisNode=$dataIsInThisNode->parentNode;
+    $whileLoopControler++;
+    if($whileLoopControler>20)//loop can run a max of 20 times else break help to prevent bad input
+    {
+break;
     }
-$d=$d->parentNode;
-    echo"\n". $d->parentNode->nodeName;
-if ($d->parentNode->nodeName=="contact"){
-    $d=$d->parentNode;
-    print "\n"."tes";
-    break;
-}
-
 }
 
 
-    $d->preserveWhiteSpace=false;
-    print '<div>';
+
+
+
+
+
+
+
+
     //print removeSpaceBetweenCapitalization($zy->nodeName);
     //print' : '. $d->hasSiblings();
-    print '</div>';
+
     //$d=$d->nextSibling;
-/*
+/*~~~~this is decending i.e from top node to bottom
  *numberOfNode= numberof node in rootParent (contact) ~typically 9
  * pos=counter
  * for pos<numberOfNode
@@ -70,27 +66,27 @@ if ($d->parentNode->nodeName=="contact"){
  *
  *
  *
- */
+*/
 
-$numberOfElementInParentNode = $d->childNodes->length;
+$numberOfElementInParentNode = $dataIsInThisNode->childNodes->length;
 for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
-    $childInCurrentNode=$d->childNodes->item($pos)->childNodes->length;
+    $childInCurrentNode=$dataIsInThisNode->childNodes->item($pos)->childNodes->length;
 
   if ($childInCurrentNode >1){
       print"<div>";
-      print $d->childNodes->item($pos)->nodeName;//->childNodes->item($);
+      print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);//->childNodes->item($);
       print"</div>";
       for($posSubNode=0 ;$posSubNode<$childInCurrentNode;$posSubNode++){
           print"<div>";
-          print $d->childNodes->item($pos)->childNodes->item($posSubNode)->nodeName."\n";
-          print $d->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue."\n";
+          print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeName)."\n";
+          print $dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue."\n";
           print"</div>";
       }
   }
     else{
         print"<div>";
-        print $d->childNodes->item($pos)->nodeName;
-         print $d->childNodes->item($pos)->nodeValue;
+        print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);
+         print"  ". $dataIsInThisNode->childNodes->item($pos)->nodeValue;
         print"</div>";
 
     }
