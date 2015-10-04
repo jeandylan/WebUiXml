@@ -9,12 +9,20 @@ $xml->load("contactList.xml");
 
 
 
-$nodeSearch = $xml->getElementsByTagName('office');
+$nodeSearch = $xml->getElementsByTagName('firstName');
 $nodeLenght  = $nodeSearch->length;
 $dataIsInThisNode;
 
+/*solution for 2 + node having same data being search for
+ * store them in an array while searching.
+ * to a for loop on the array element  to get parent node
+ * to a for loop on the array to dislay information.
+ *
+ *
+ */
 for ($nodeIndex = 0; $nodeIndex < $nodeLenght; $nodeIndex++) {
-    if ($nodeSearch->item($nodeIndex)->nodeValue=="6310814"){
+
+    if ($nodeSearch->item($nodeIndex)->nodeValue=="John"){
 
         $dataIsInThisNode=$nodeSearch->item($nodeIndex);
 

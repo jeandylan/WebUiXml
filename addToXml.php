@@ -6,6 +6,8 @@
 $xml = new DOMDocument();
 $xml->load("contactList.xml");
 $root   = $xml->documentElement;
+//creating id =epochTime+rndnumber
+$grdId=(string)time().(string) rand(1,99);
 //getting data from post
 $pstFirstName= $_POST['firstName'];
 $pstLastName= $_POST['lastName'];
@@ -26,13 +28,16 @@ $firstNode  = $root;
 //contact node <contact>
 $contactNode=$xml->createElement("contact");
 //inside contact <contact> <image>dedferfr
+$id=$xml->createElement("id",$grdId);
 $image=$xml->createElement("image",$pstFirstName); //no image
 $firstName=$xml->createElement("firstName",$pstFirstName);
 $lastName=$xml->createElement("lastName",$pstLastName);
 $gender=$xml->createElement("gender",$pstGender);
 $nickName=$xml->createElement("nickName",$pstNickName);
 $dateOfBirth=$xml->createElement("dateOfBirth",$pstDateOfBirth);
+//appending element
 $root->appendChild($contactNode);
+$contactNode->appendChild($id);
 $contactNode->appendChild($image);
 $contactNode->appendChild($firstName);
 $contactNode->appendChild($lastName);

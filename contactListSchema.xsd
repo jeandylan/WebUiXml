@@ -16,6 +16,14 @@
        
            
         <xs:sequence>
+            <xs:element name="id">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[aZ0-zZ9]+"></xs:pattern>
+                    </xs:restriction>  
+                </xs:simpleType>   
+                
+            </xs:element>
             <xs:element name="image" type="xs:string" minOccurs="0" maxOccurs="1"/>
             
             <xs:element name="firstName">
