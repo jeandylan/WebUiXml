@@ -1,4 +1,6 @@
-<?php
+<?php session_start();
+
+$_SESSION["favcolor"] = "green";
 include 'xmlFunction.php';
 $xml = new DOMDocument();
 $xml->preserveWhiteSpace = false;
@@ -84,7 +86,7 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
 
     if ($childInCurrentNode >1){
 
-        print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);//->childNodes->item($);
+        //print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);//->childNodes->item($);
 
         for($posSubNode=0 ;$posSubNode<$childInCurrentNode;$posSubNode++){
 
@@ -140,4 +142,9 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
     }
 }
 echo $htmlFile;
+function printx(){
+    $htmlFile = file_get_contents("modifyXmlTemplate.html");
+    echo $htmlFile;
+}
+
 ?>

@@ -3,13 +3,14 @@ include 'xmlFunction.php';
 $xml = new DOMDocument();
 $xml->preserveWhiteSpace = false;
 $xml->load("contactList.xml");
+$pstDataSearch= $_POST['dataSearch'];
+$pstnodeSearch= $_POST['nodeSearch'];
+
+echo"yes";
 
 
 
-
-
-
-$nodeSearch = $xml->getElementsByTagName('firstName');
+$nodeSearch = $xml->getElementsByTagName($pstnodeSearch);
 $nodeLenght  = $nodeSearch->length;
 $dataIsInThisNode;
 
@@ -22,7 +23,7 @@ $dataIsInThisNode;
  */
 for ($nodeIndex = 0; $nodeIndex < $nodeLenght; $nodeIndex++) {
 
-    if ($nodeSearch->item($nodeIndex)->nodeValue=="John"){
+    if ($nodeSearch->item($nodeIndex)->nodeValue==$pstDataSearch){
 
         $dataIsInThisNode=$nodeSearch->item($nodeIndex);
 

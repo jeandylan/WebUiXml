@@ -13,7 +13,7 @@ $xml=simplexml_load_file("contactList.xml") or die("Error: Cannot create object"
 
 
 $html="";
-$htmlFile = file_get_contents("serachXml.html"); // opens template.html
+$htmlFile = file_get_contents("viewAllXml.html"); // opens template.html
 
 
 
