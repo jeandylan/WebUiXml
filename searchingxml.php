@@ -41,6 +41,7 @@ while($dataIsInThisNode->nodeName !="contact"){
     {
 break;
     }
+
 }
 
 

@@ -1,6 +1,4 @@
 <?php session_start();
-
-$_SESSION["favcolor"] = "green";
 include 'xmlFunction.php';
 $xml = new DOMDocument();
 $xml->preserveWhiteSpace = false;
@@ -79,7 +77,7 @@ while($dataIsInThisNode->nodeName !="contact"){
 */
 
 $htmlFile = file_get_contents("modifyXmlTemplate.html");
-
+$htmlFile = str_replace("{{xpath}}",$dataIsInThisNode->getNodePath(), $htmlFile);
 $numberOfElementInParentNode = $dataIsInThisNode->childNodes->length;
 for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
     $childInCurrentNode=$dataIsInThisNode->childNodes->item($pos)->childNodes->length;
@@ -142,9 +140,6 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
     }
 }
 echo $htmlFile;
-function printx(){
-    $htmlFile = file_get_contents("modifyXmlTemplate.html");
-    echo $htmlFile;
-}
+
 
 ?>
