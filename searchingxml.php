@@ -101,5 +101,8 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
 
     }
 }
-
+echo '<p>
+  <button class="btn btn-large btn-primary" type="submit" value="'.$id.'" name="edit">edit</button>
+  <button class="btn btn-large btn-danger" value="'.$nodeNumber.'" type="submit" name="delete">delete button</button>
+</p>';
 ?>
