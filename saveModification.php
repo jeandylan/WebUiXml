@@ -6,7 +6,7 @@
  * Time: 12:57 AM
  */
 
-$xpath= $_POST['xpath'];
+$xpath= $_POST["xpath"];
 echo $xpath;
 libxml_use_internal_errors(true); //use for debugging
 $xml = new DomDocument;
@@ -15,8 +15,9 @@ $xml->load("contactList.xml");
 $xpathOfNode = new DomXPath($xml);
 $nodes = $xpathOfNode->query($xpath);
 $numberOfElementInParentNode=$nodes->item(0)->childNodes->length;
-
-
+$childInCurrentNode;
+$dataIsInThisNode=$nodes->item(0);
+echo $numberOfElementInParentNode;
 for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
     $childInCurrentNode=$dataIsInThisNode->childNodes->item($pos)->childNodes->length;
 
@@ -62,13 +63,13 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
         $nodeText=$dataIsInThisNode->childNodes->item($pos)->nodeValue;
         switch ($nodeName) {
             case "firstName":
-                $dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue=$_POST['firstName'];
+                $dataIsInThisNode->childNodes->item($pos)->nodeValue=$_POST['firstName'];
                 break;
             case "lastName":
-                $dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue=$_POST['lastName'];
+                $dataIsInThisNode->childNodes->item($pos)->nodeValue=$_POST['lastName'];
                 break;
             case "nickName":
-                $dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue=$_POST['nickName'];
+                $dataIsInThisNode->childNodes->item($pos)->nodeValue=$_POST['nickName'];
                 break;
 
             default:
@@ -78,6 +79,6 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
     }
 }
 $xml->save("contactList.xml");
-echo "changes sucessful"
+echo "changes sucessful";
 
 ?>

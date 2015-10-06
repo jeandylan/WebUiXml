@@ -6,7 +6,7 @@ $xml->load("contactList.xml");
 $pstDataSearch= $_POST['dataSearch'];
 $pstnodeSearch= $_POST['nodeSearch'];
 
-echo"yes";
+
 
 
 

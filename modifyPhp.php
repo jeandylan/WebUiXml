@@ -1,18 +1,13 @@
+
+
 <?php session_start();
 include 'xmlFunction.php';
 $xml = new DOMDocument();
 $xml->preserveWhiteSpace = false;
 $xml->load("contactList.xml");
-
-
-
-
-
-
-$nodeSearch = $xml->getElementsByTagName('firstName');
+$nodeSearch = $xml->getElementsByTagName('id');
 $nodeLenght  = $nodeSearch->length;
 $dataIsInThisNode;
-
 /*solution for 2 + node having same data being search for
  * store them in an array while searching.
  * to a for loop on the array element  to get parent node
@@ -21,19 +16,12 @@ $dataIsInThisNode;
  *
  */
 for ($nodeIndex = 0; $nodeIndex < $nodeLenght; $nodeIndex++) {
-
-    if ($nodeSearch->item($nodeIndex)->nodeValue=="John"){
-
+    if ($nodeSearch->item($nodeIndex)->nodeValue==$_GET["contactId"]){
         $dataIsInThisNode=$nodeSearch->item($nodeIndex);
-
     }
-
 }
-
-
 $whileLoopControler=0;//a loop controller to prevent below loop from overflowing
 while($dataIsInThisNode->nodeName !="contact"){
-
     $dataIsInThisNode=$dataIsInThisNode->parentNode;
     $whileLoopControler++;
     if($whileLoopControler>20)//loop can run a max of 20 times else break help to prevent bad input
@@ -41,19 +29,8 @@ while($dataIsInThisNode->nodeName !="contact"){
         break;
     }
 }
-
-
-
-
-
-
-
-
-
-
 //print removeSpaceBetweenCapitalization($zy->nodeName);
 //print' : '. $d->hasSiblings();
-
 //$d=$d->nextSibling;
 /*~~~~this is decending i.e from top node to bottom
  *numberOfNode= numberof node in rootParent (contact) ~typically 9
@@ -75,19 +52,14 @@ while($dataIsInThisNode->nodeName !="contact"){
  *
  *
 */
-
 $htmlFile = file_get_contents("modifyXmlTemplate.html");
 $htmlFile = str_replace("{{xpath}}",$dataIsInThisNode->getNodePath(), $htmlFile);
 $numberOfElementInParentNode = $dataIsInThisNode->childNodes->length;
 for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
     $childInCurrentNode=$dataIsInThisNode->childNodes->item($pos)->childNodes->length;
-
     if ($childInCurrentNode >1){
-
         //print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);//->childNodes->item($);
-
         for($posSubNode=0 ;$posSubNode<$childInCurrentNode;$posSubNode++){
-
             $nodeName=$dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeName;
             $nodeText=$dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue;
             switch ($nodeName) {
@@ -115,11 +87,9 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
                 default:
                     break;
             }
-
         }
     }
     else{
-
         $nodeName=$dataIsInThisNode->childNodes->item($pos)->nodeName;
         $nodeText=$dataIsInThisNode->childNodes->item($pos)->nodeValue;
         switch ($nodeName) {
@@ -132,14 +102,12 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
             case "nickName":
                 $htmlFile = str_replace("{{nickName}}",$nodeText, $htmlFile);
                 break;
-
-              default:
+            default:
                 break;
         }
-
     }
 }
 echo $htmlFile;
-
+?>
 
 ?>

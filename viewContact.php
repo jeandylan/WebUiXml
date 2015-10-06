@@ -20,17 +20,22 @@ $htmlFile = file_get_contents("viewAllXml.html"); // opens template.html
 
 
 
+appendToHtml(' <form role="form" action="Dispatcher.php" method="post">');
 
 
-
-
-
+$nodeNumber=0;
+$id;
 foreach($xml->children() as $child) {
     $html = $html . '<div class="row SolidBorder container-fluid "><div class="row">';
     appendToHtml(removeSpaceBetweenCapitalization($child->getName()).'</div>');
+$nodeNumber++;
 
 
     foreach ($child->children() as $subchild) {
+        if ($subchild->getName() =="id") {
+           $id=$subchild;
+            continue;
+        }
         appendToHtml("<div class='row'>");
 
         //if it is an image jump to next for loop (assumng image has no Child)
@@ -54,12 +59,16 @@ foreach($xml->children() as $child) {
                 //appendToHtml("<\div>");
 
             }
+
         }
 
-
+    appendToHtml('<p>
+  <button class="btn btn-large btn-primary" type="submit" value="'.$id.'" name="edit">edit</button>
+  <button class="btn btn-large btn-danger" value="'.$nodeNumber.'" type="submit" name="delete">delete button</button>
+</p>' );
 
 }
-
+appendToHtml("</form>");
     $html=$html.'</div></div>';
 
 $html = str_replace("{{contactData}}", $html, $htmlFile); // replaces placeholder with $username
