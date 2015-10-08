@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" />
+    <script type="text/javascript" src="bootstrap-3.3.5-dist/js/npm.js"></script>
+    <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/xmlStylesheet.css" />
+</head>
+
+<body>
+
+    <div class="p">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">xml editor</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid padding10 paddingLeft">
+        <form role="form" action="searchingxml.php" method="post">
+            <div class="form-group">
+                <label for="iddataSearch">insert data being search:</label>
+                <input type="text" class="form-control" id="iddataSearch" name="dataSearch">
+            </div>
+            <div class="form-group">
+                <label for="sel1">search based on:</label>
+                <select class="form-control" id="sel1" name="nodeSearch">
+                    <option>firstName</option>
+                    <option>lastName</option>
+                    <option>office</option>
+                    <option>personalEmail</option>
+                </select>
+                </div>
+            <button type="submit" class="btn btn-info">search</button>
+         </form>
+{{contactData}}
+
+    </div>
+
+</body>
+</html>
+
+</body>
+</html>
