@@ -20,9 +20,13 @@ if ($_POST["edit"]) {
     header('Location:'. $url);
 }
 elseif ($_POST["delete"]) {
-    $xpath='/contactLists/contact['.$_POST["delete"].']';
-    setcookie("edit",$xpath , time()+3600, "/","", 0);
-    header('Location: a.php');
+
+    $contactId = $_POST["delete"];
+
+
+    $query_string = "contactId={$contactId}";
+    $url = "deleteXmlFile.php?" . $query_string;
+    header('Location:'.$url);
 }
 
 ?>

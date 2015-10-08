@@ -13,6 +13,7 @@ $pstnodeSearch= $_POST['nodeSearch'];
 $nodeSearch = $xml->getElementsByTagName($pstnodeSearch);
 $nodeLenght  = $nodeSearch->length;
 $dataIsInThisNode;
+print $nodeLenght;
 
 /*solution for 2 + node having same data being search for
  * store them in an array while searching.
@@ -77,7 +78,7 @@ break;
  *
  *
 */
-
+echo '<form role="form" action="Dispatcher.php" method="post">';
 $numberOfElementInParentNode = $dataIsInThisNode->childNodes->length;
 for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
     $childInCurrentNode=$dataIsInThisNode->childNodes->item($pos)->childNodes->length;
@@ -94,15 +95,20 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
       }
   }
     else{
+       $nodeName=$dataIsInThisNode->childNodes->item($pos)->nodeName;
+        $valueInNode=$dataIsInThisNode->childNodes->item($pos)->nodeValue;
+        if ($nodeName=="id"){
+            $id=$valueInNode;
+        }
         print"<div>";
-        print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);
-         print"  ". $dataIsInThisNode->childNodes->item($pos)->nodeValue;
+        print removeSpaceBetweenCapitalization($nodeName);
+         print"  ".$valueInNode ;
         print"</div>";
 
     }
 }
 echo '<p>
   <button class="btn btn-large btn-primary" type="submit" value="'.$id.'" name="edit">edit</button>
-  <button class="btn btn-large btn-danger" value="'.$nodeNumber.'" type="submit" name="delete">delete button</button>
-</p>';
+  <button class="btn btn-large btn-danger" value="'.$id.'" type="submit" name="delete">delete button</button>
+</p></form>';
 ?>
