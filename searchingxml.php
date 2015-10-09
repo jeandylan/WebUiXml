@@ -22,27 +22,29 @@ print $nodeLenght;
  *
  *
  */
+$foundSearch=array(); //store item with matching data within search criteria
 for ($nodeIndex = 0; $nodeIndex < $nodeLenght; $nodeIndex++) {
 
     if ($nodeSearch->item($nodeIndex)->nodeValue==$pstDataSearch){
 
         $dataIsInThisNode=$nodeSearch->item($nodeIndex);
-
+        array_push($foundSearch,$dataIsInThisNode); //push the matching data to array
     }
 
 }
 
+foreach ($foundSearch as &$dataIsInThisNode) {
+    $whileLoopControler = 0;//a loop controller to prevent below loop from overflowing
+    while ($dataIsInThisNode->nodeName != "contact") {
 
-$whileLoopControler=0;//a loop controller to prevent below loop from overflowing
-while($dataIsInThisNode->nodeName !="contact"){
+        $dataIsInThisNode = $dataIsInThisNode->parentNode;
+        $whileLoopControler++;
+        if ($whileLoopControler > 20)//loop can run a max of 20 times else break help to prevent bad input
+        {
+            break;
+        }
 
-    $dataIsInThisNode=$dataIsInThisNode->parentNode;
-    $whileLoopControler++;
-    if($whileLoopControler>20)//loop can run a max of 20 times else break help to prevent bad input
-    {
-break;
     }
-
 }
 
 
@@ -78,37 +80,38 @@ break;
  *
  *
 */
-echo '<form role="form" action="Dispatcher.php" method="post">';
-$numberOfElementInParentNode = $dataIsInThisNode->childNodes->length;
-for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
-    $childInCurrentNode=$dataIsInThisNode->childNodes->item($pos)->childNodes->length;
+foreach($foundSearch as &$dataIsInThisNode) { //iterate throw each node with corresponding matching search done before
+    echo '<form role="form" action="Dispatcher.php" method="post">';
+    $numberOfElementInParentNode = $dataIsInThisNode->childNodes->length;
+    for ($pos = 0; $pos < $numberOfElementInParentNode; $pos++) {
+        $childInCurrentNode = $dataIsInThisNode->childNodes->item($pos)->childNodes->length;
 
-  if ($childInCurrentNode >1){
-      print"<div>";
-      print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);//->childNodes->item($);
-      print"</div>";
-      for($posSubNode=0 ;$posSubNode<$childInCurrentNode;$posSubNode++){
-          print"<div>";
-          print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeName)."\n";
-          print $dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue."\n";
-          print"</div>";
-      }
-  }
-    else{
-       $nodeName=$dataIsInThisNode->childNodes->item($pos)->nodeName;
-        $valueInNode=$dataIsInThisNode->childNodes->item($pos)->nodeValue;
-        if ($nodeName=="id"){
-            $id=$valueInNode;
+        if ($childInCurrentNode > 1) {
+            print"<div>";
+            print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);//->childNodes->item($);
+            print"</div>";
+            for ($posSubNode = 0; $posSubNode < $childInCurrentNode; $posSubNode++) {
+                print"<div>";
+                print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeName) . "\n";
+                print $dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue . "\n";
+                print"</div>";
+            }
+        } else {
+            $nodeName = $dataIsInThisNode->childNodes->item($pos)->nodeName;
+            $valueInNode = $dataIsInThisNode->childNodes->item($pos)->nodeValue;
+            if ($nodeName == "id") {
+                $id = $valueInNode;
+            }
+            print"<div>";
+            print removeSpaceBetweenCapitalization($nodeName);
+            print"  " . $valueInNode;
+            print"</div>";
+
         }
-        print"<div>";
-        print removeSpaceBetweenCapitalization($nodeName);
-         print"  ".$valueInNode ;
-        print"</div>";
-
     }
-}
-echo '<p>
-  <button class="btn btn-large btn-primary" type="submit" value="'.$id.'" name="edit">edit</button>
-  <button class="btn btn-large btn-danger" value="'.$id.'" type="submit" name="delete">delete button</button>
+    echo '<p>
+  <button class="btn btn-large btn-primary" type="submit" value="' . $id . '" name="edit">edit</button>
+  <button class="btn btn-large btn-danger" value="' . $id . '" type="submit" name="delete">delete button</button>
 </p></form>';
+}
 ?>
