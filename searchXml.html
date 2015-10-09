@@ -2,22 +2,40 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" />
     <script type="text/javascript" src="bootstrap-3.3.5-dist/js/npm.js"></script>
     <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/xmlStylesheet.css" />
-</head>
+    <script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = "";
 
+                return;
+            } else {
+                var e = document.getElementById("selectNode");
+                var nodeSearch = e.options[e.selectedIndex].value;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "getSearchHint.php?query=" + str+"&nodeSearch="+nodeSearch, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+</head>
 <body>
+
+
+
+
+
 
     <div class="p">
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -40,26 +58,32 @@
     <div class="container-fluid padding10 paddingLeft">
         <form role="form" action="searchingxml.php" method="post">
             <div class="form-group">
-                <label for="iddataSearch">insert data being search:</label>
-                <input type="text" class="form-control" id="iddataSearch" name="dataSearch">
-            </div>
-            <div class="form-group">
-                <label for="sel1">search based on:</label>
-                <select class="form-control" id="sel1" name="nodeSearch">
+                <label for="selectNode">search based on:</label>
+                <select class="form-control" id="selectNode" name="nodeSearch">
                     <option>firstName</option>
                     <option>lastName</option>
-                    <option>office</option>
+                    <option>city</option>
+                    <option>officeEmail</option>
                     <option>personalEmail</option>
+                    <option>privateMobile</option>
+                    <option>office</option>
+
                 </select>
+            </div>
+            <div class="row">
+            <div class="form-group col-lg-8">
+                <label for="iddataSearch">insert data being search:</label>
+                <input type="text" class="form-control col-lg-8" id="iddataSearch" name="dataSearch" onkeyup="showHint(this.value)">
                 </div>
+                <div class="col-sm-4">Suggestions:<div> <span id="txtHint"></span></div></div>
+
+            </div>
             <button type="submit" class="btn btn-info">search</button>
          </form>
-{{contactData}}
+        <p id="data" style="visibility: hidden">{{contactData}}</p>
 
     </div>
 
 </body>
-</html>
 
-</body>
-</html>
+

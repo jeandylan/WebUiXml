@@ -5,7 +5,8 @@ $xml->preserveWhiteSpace = false;
 $xml->load("contactList.xml");
 $pstDataSearch= $_POST['dataSearch'];
 $pstnodeSearch= $_POST['nodeSearch'];
-
+$html="";
+$htmlFile = file_get_contents("searchXml.html"); // opens template.html
 
 
 
@@ -80,38 +81,57 @@ foreach ($foundSearch as &$dataIsInThisNode) {
  *
  *
 */
+appendToHtml('<form role="form" action="Dispatcher.php" method="post">');
 foreach($foundSearch as &$dataIsInThisNode) { //iterate throw each node with corresponding matching search done before
-    echo '<form role="form" action="Dispatcher.php" method="post">';
+    $html = $html . '<div class="row SolidBorder container-fluid ">';
     $numberOfElementInParentNode = $dataIsInThisNode->childNodes->length;
     for ($pos = 0; $pos < $numberOfElementInParentNode; $pos++) {
-        $childInCurrentNode = $dataIsInThisNode->childNodes->item($pos)->childNodes->length;
 
-        if ($childInCurrentNode > 1) {
-            print"<div>";
-            print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->nodeName);//->childNodes->item($);
-            print"</div>";
-            for ($posSubNode = 0; $posSubNode < $childInCurrentNode; $posSubNode++) {
-                print"<div>";
-                print removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeName) . "\n";
-                print $dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue . "\n";
-                print"</div>";
-            }
-        } else {
-            $nodeName = $dataIsInThisNode->childNodes->item($pos)->nodeName;
-            $valueInNode = $dataIsInThisNode->childNodes->item($pos)->nodeValue;
-            if ($nodeName == "id") {
-                $id = $valueInNode;
-            }
-            print"<div>";
-            print removeSpaceBetweenCapitalization($nodeName);
-            print"  " . $valueInNode;
-            print"</div>";
+        $nodeName = $dataIsInThisNode->childNodes->item($pos)->nodeName;
+        $valueInNode = $dataIsInThisNode->childNodes->item($pos)->nodeValue;
 
+
+        if ($nodeName == "id") {
+            $id = $valueInNode;
         }
-    }
-    echo '<p>
+        if ($nodeName =="image") {
+            appendToHtml('<div class="row>"><img src="'.$valueInNode.'" alt="..." class="img-rounded"></div>');
+                continue;
+        }
+
+        $childInCurrentNode = $dataIsInThisNode->childNodes->item($pos)->childNodes->length;
+        if ($childInCurrentNode>1){
+            appendToHtml('<div class="row"><span class="h4 text-danger "><strong>' .removeSpaceBetweenCapitalization($nodeName. '</strong></span></div>'));
+
+                for($posSubNode=0 ;$posSubNode<$childInCurrentNode;$posSubNode++){
+
+                    appendToHtml('<div class="row"><span class="h4 text-primary">'.removeSpaceBetweenCapitalization($dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeName)."</span> : ".$dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue."</div>");
+
+
+                }
+        }
+            else{
+
+                appendToHtml('<div class="row"> <span class="h4 text-primary">' . removeSpaceBetweenCapitalization($nodeName) . "</span>" . " : " . '<em>' . $valueInNode . '</em>' . '</div>');
+
+            }
+            }
+    appendToHtml('<div class="row"> <p>
   <button class="btn btn-large btn-primary" type="submit" value="' . $id . '" name="edit">edit</button>
   <button class="btn btn-large btn-danger" value="' . $id . '" type="submit" name="delete">delete button</button>
-</p></form>';
-}
+</p></div>');
+
+    }
+appendToHtml("</div>");
+
+appendToHtml("</form>");
+
+
+$html = str_replace("{{contactData}}", $html, $htmlFile); // replaces placeholder with $username
+
+echo $html;
+
 ?>
+<script>
+    $( '#data' ).css('display', 'none');
+</script>
