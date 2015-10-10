@@ -64,26 +64,30 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
             $nodeText=$dataIsInThisNode->childNodes->item($pos)->childNodes->item($posSubNode)->nodeValue;
             switch ($nodeName) {
                 case "city":
-                    $htmlFile = str_replace("{{city}}",$nodeText , $htmlFile);
+                    $htmlFile = str_replace("{{city}}", $nodeText, $htmlFile);
                     break;
                 case "street":
-                    $htmlFile = str_replace("{{street}}",$nodeText , $htmlFile);
+                    $htmlFile = str_replace("{{street}}", $nodeText, $htmlFile);
                     break;
                 case "postalCode":
-                    $htmlFile = str_replace("{{postalCode}}",$nodeText, $htmlFile);
+                    $htmlFile = str_replace("{{postalCode}}", $nodeText, $htmlFile);
                     break;
                 case "officeEmail":
-                    $htmlFile = str_replace("{{officeEmail}}",$nodeText, $htmlFile);
+                    $htmlFile = str_replace("{{officeEmail}}", $nodeText, $htmlFile);
                     break;
                 case "privateEmail":
-                    $htmlFile = str_replace("{{privateEmail}}",$nodeText, $htmlFile);
+                    $htmlFile = str_replace("{{privateEmail}}", $nodeText, $htmlFile);
                     break;
                 case "privateMobile":
-                    $htmlFile = str_replace("{{privateMobile}}",$nodeText, $htmlFile);
+                    $htmlFile = str_replace("{{privateMobile}}", $nodeText, $htmlFile);
                     break;
                 case "office":
-                    $htmlFile = str_replace("{{office}}",$nodeText, $htmlFile);
+                    $htmlFile = str_replace("{{office}}", $nodeText, $htmlFile);
                     break;
+                case "country":
+                    $htmlFile = str_replace("{{script2}}",'document.getElementById("country").value ="'.$nodeText.'";', $htmlFile);
+                    break;
+
                 default:
                     break;
             }
@@ -96,11 +100,23 @@ for($pos=0; $pos<$numberOfElementInParentNode; $pos++){
             case "firstName":
                 $htmlFile = str_replace("{{firstName}}",$nodeText , $htmlFile);
                 break;
+            case "dateOfBirth":
+                $htmlFile = str_replace("{{dateOfBirth}}",$nodeText , $htmlFile);
+                break;
             case "lastName":
                 $htmlFile = str_replace("{{lastName}}",$nodeText , $htmlFile);
                 break;
             case "nickName":
                 $htmlFile = str_replace("{{nickName}}",$nodeText, $htmlFile);
+                break;
+            case "gender":
+                if ($nodeText == "M") {
+                    $htmlFile = str_replace("{{script1}}", "document.getElementById('btnMale').checked = true;", $htmlFile);
+                }
+                if ($nodeText == "F") {
+                    $htmlFile = str_replace("{{script1}}", "document.getElementById('btnFemale').checked = true;", $htmlFile);
+                }
+
                 break;
             default:
                 break;

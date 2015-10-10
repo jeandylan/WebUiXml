@@ -10,11 +10,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <script type="text/javascript" src="jQuery/jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" />
-    <script type="text/javascript" src="bootstrap-3.3.5-dist/js/npm.js"></script>
-    <script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/xmlStylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="jasny-bootstrap/css/jasny-bootstrap.min.css" />
+    <script>
+        function hideAlert() {
+            document.getElementById("alertMsg").remove();
+        }
+        function goToMainPage() {
+            window.location="Index.html";
+        }
+
+</script>
+
+
+
 </head>
 
 <body>
@@ -39,17 +55,37 @@
 </div>
 <div class="container-fluid padding10 paddingLeft">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <form role="form" action="viewAllXml.html" method="post">
+        <form role="form" action="addToXml.php" method="post" enctype="multipart/form-data">
             <h2>Enter Details <small>these will be stored in an Xml File</small></h2>
             <hr class="colorgraph">
+
+            <h4 class="badge">personal details</h4>
+
+
+            <div class="form-group">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                        <img data-src="holder.js/100%x100%" alt="...">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                    <div>
+                        <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="fileToUpload"></span>
+                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                    </div>
+                </div>
+            </div>
             <div class="row">
+
                 <div class="col-xs-12 col-sm-6 col-md-6">
+
                     <div class="form-group">
+                        First name:
                         <input type="text" name="firstName" id="firstName" class="form-control input-lg" placeholder="First Name" tabindex="1">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="form-group">
+                        Last name:
                         <input type="text" name="lastName" id="lastName" class="form-control input-lg" placeholder="Last Name" tabindex="2">
                     </div>
                 </div>
@@ -57,36 +93,43 @@
             <div class="row">
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <div class="form-group">
+                    Nick name:
                     <input type="text" name="nickName" id="nickName" class="form-control input-lg" placeholder="nick Name" tabindex="4">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
                 <div class="form-group">
+                    Gender:
                     <input type="text" name="Gender" id="Gender" class="form-control input-lg" placeholder="Gender" tabindex="5">
                 </div>
             </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
+                    Date of birth:
                     <div class="form-group">
                         <input type="text" name="dateOfBirth" id="dateOfBirth" class="form-control input-lg" placeholder="Date Of Name" tabindex="5">
                     </div>
                 </div>
 </div>
-<h4>postal Details<h4>
+<h4 class="badge">Postal Details</h4>
 
             <div class="form-group">
+                City:
                 <input type="text" name="city" id="city" class="form-control input-lg" placeholder="city" tabindex="4">
             </div>
             <div class="form-group">
+                Street:
                 <input type="text" name="street" id="street" class="form-control input-lg" placeholder="street" tabindex="4">
             </div>
            <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-6">
         <div class="form-group">
+            Country:
             <input type="text" name="country" id="country" class="form-control input-lg" placeholder="county" tabindex="5">
         </div>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-6">
         <div class="form-group">
+            Postal code:
             <input type="text" name="postalCode" id="postalCode" class="form-control input-lg" placeholder="postal code" tabindex="6">
         </div>
     </div>
@@ -94,22 +137,26 @@
 
 
 
-<h4>Emails Details</h4>
+<h4 class="badge">Emails Details</h4>
     <div class="form-group">
+        Office email:
         <input type="email" name="officeEmail" id="officeEmail" class="form-control input-lg" placeholder="officeEmail" tabindex="4">
     </div>
     <div class="form-group">
+        Private email:
         <input type="email" name="privateEmail" id="privateEmail" class="form-control input-lg" placeholder="private Email" tabindex="4">
     </div>
-    <h4> TelephoneDetails</h4>
+    <h4 class="badge"> TelephoneDetails</h4>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
+                Private mobile:
                 <input type="number" name="privateMobile" id="privateMobile" class="form-control input-lg" placeholder="private Mobile" tabindex="5">
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
+                Office number:
                 <input type="number" name="office" id="office" class="form-control input-lg" placeholder="office Mobile" tabindex="6">
             </div>
         </div>
@@ -118,13 +165,13 @@
 
             <hr class="colorgraph">
             <div class="row">
-                <div class="form-group-lg"><input type="submit" value="Add to xml" name="submitAddXml" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                <div class="form-group-lg"><input type="submit" id="btnSubmit" value="Add to xml" name="submitAddXml" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
 
             </div>
 
         </form>
     </div>
-
+{{alert}}
 </div>
 
 </body>
