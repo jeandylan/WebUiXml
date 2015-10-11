@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contactLists xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="contactListSchema.xsd">
+    <contact>
+        <id>140315</id>
+        <image>image/sanchez.jpg</image>
+        <firstName>John</firstName>
+        <lastName>Doe</lastName>
+        <gender>M</gender>
+        <nickName>jD</nickName>
+        <dateOfBirth>2002-12-12</dateOfBirth>
+        <postalDetails>
+            <city>mahe</city>   
+            <street>rue la hiiix</street>
+            <postalCode>uyuiui</postalCode>
+            <country>mauritius</country>
+        </postalDetails>
+        <emails>
+            <officeEmail>dert@yahoo.com</officeEmail>
+            <privateEmail>frtyuio@yahoo.com</privateEmail>
+        </emails>
+        <telephoneNumbers>
+            <privateMobile>56782345</privateMobile>
+            <office>4535655</office>
+        </telephoneNumbers>
+    </contact>
+    <contact>
+        <id>3rfrf</id>
+        <image>image/sanchez.jpg</image>
+        <firstName>Anneilla</firstName>
+        <lastName>Marine</lastName>
+        <gender>F</gender>
+        <nickName>Ann.Mary</nickName>
+        <dateOfBirth>2002-12-12</dateOfBirth>
+        <postalDetails>
+            <city>paris</city>   
+            <street>rue la place</street>
+            <postalCode>566473few</postalCode>
+            <country>france</country>
+        </postalDetails>
+        <emails>
+            <officeEmail>paris@yahoo.com</officeEmail>
+            <privateEmail>drake@yahoo.com</privateEmail>
+        </emails>
+        <telephoneNumbers>
+            <privateMobile>51234567</privateMobile>
+            <office>7654321</office>
+        </telephoneNumbers>
+    </contact>
+   <contact><id>144417131527</id><image>tgrtgfg54c5rtfr5</image><firstName>tgrtgfg54c5rtfr5</firstName><lastName/><gender>M</gender><nickName>blais M</nickName><dateOfBirth/><postalDetails><city/><street/><postalCode/><country>Mauritius</country></postalDetails><emails><officeEmail/><privateEmail/></emails><telephoneNumbers><privateMobile/><office/></telephoneNumbers></contact></contactLists>
