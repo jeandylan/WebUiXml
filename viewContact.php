@@ -64,7 +64,7 @@ $nodeNumber++;
 
     appendToHtml('<p>
   <button class="btn btn-large btn-primary" type="submit" value="'.$id.'" name="edit">edit</button>
-  <button class="btn btn-large btn-danger" value="'.$nodeNumber.'" type="submit" name="delete">delete button</button>
+  <button class="btn btn-large btn-danger" value="'.$id.'" type="submit" name="delete">delete button</button>
 </p>' );
 
 }

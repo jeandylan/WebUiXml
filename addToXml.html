@@ -16,7 +16,7 @@
     <script type="text/javascript" src="jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/bootstrap-theme.min.css" />
-
+    <script type="text/javascript" src="jQuery/validator.js"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.5-dist/css/xmlStylesheet.css" />
     <link rel="stylesheet" type="text/css" href="jasny-bootstrap/css/jasny-bootstrap.min.css" />
     <script>
@@ -26,7 +26,7 @@
         function goToMainPage() {
             window.location="Index.html";
         }
-
+        $('#myForm').validator()
 </script>
 
 
@@ -55,7 +55,7 @@
 </div>
 <div class="container-fluid padding10 paddingLeft">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-        <form role="form" action="addToXml.php" method="post" enctype="multipart/form-data">
+        <form role="form" id="myForm" action="addToXml.php" method="post" enctype="multipart/form-data" data-toggle="validator">
             <h2>Enter Details <small>these will be stored in an Xml File</small></h2>
             <hr class="colorgraph">
 
@@ -97,12 +97,14 @@
                     <input type="text" name="nickName" id="nickName" class="form-control input-lg" placeholder="nick Name" tabindex="4">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <div class="form-group">
-                    Gender:
-                    <input type="text" name="Gender" id="Gender" class="form-control input-lg" placeholder="Gender" tabindex="5">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="form-group">
+                        Gender:
+                        <label class="radio-inline"><input type="radio" name="gender" value="M" id="btnMale">M</label>
+                        <label class="radio-inline"><input type="radio" name="gender" value="F" id="btnFemale">F</label>
+
+                    </div>
                 </div>
-            </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
                     Date of birth:
                     <div class="form-group">
@@ -123,8 +125,16 @@
            <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-6">
         <div class="form-group">
-            Country:
-            <input type="text" name="country" id="country" class="form-control input-lg" placeholder="county" tabindex="5">
+
+            <label for="country">Country:</label>
+            <select class="form-control" name="country" id="country">
+                <option value="Mauritius">Mauritius</option>
+                <option value="Rodrigues">Rodrigues</option>
+                <option value="Mayottes">Mayottes</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Austrailia">Austrailia</option>
+                <option value="france">france</option>
+            </select>
         </div>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-6">
@@ -151,13 +161,13 @@
         <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
                 Private mobile:
-                <input type="number" name="privateMobile" id="privateMobile" class="form-control input-lg" placeholder="private Mobile" tabindex="5">
+                <input type="number" pattern="[5]\d{7}" name="privateMobile" id="privateMobile" class="form-control input-lg" placeholder="private Mobile" tabindex="5">
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="form-group">
                 Office number:
-                <input type="number" name="office" id="office" class="form-control input-lg" placeholder="office Mobile" tabindex="6">
+                <input type="number" name="office"  pattern="\d{7}" id="office" class="form-control input-lg" placeholder="office Mobile" tabindex="6">
             </div>
         </div>
     </div>

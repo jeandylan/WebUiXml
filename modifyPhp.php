@@ -7,7 +7,7 @@ $xml->preserveWhiteSpace = false;
 $xml->load("contactList.xml");
 $nodeSearch = $xml->getElementsByTagName('id');
 $nodeLenght  = $nodeSearch->length;
-$dataIsInThisNode;
+$dataIsInThisNode; //store where data is
 /*solution for 2 + node having same data being search for
  * store them in an array while searching.
  * to a for loop on the array element  to get parent node
